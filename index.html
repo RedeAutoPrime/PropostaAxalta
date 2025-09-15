@@ -27,12 +27,15 @@
             width: 100%;
             height: 100%;
             position: absolute;
+            top: 0;
+            left: 0;
             background: white;
             display: flex;
             flex-direction: column;
             opacity: 0;
+            visibility: hidden;
             transform: translateX(100%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease-in-out;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow-y: auto;
@@ -41,16 +44,21 @@
 
         .slide.active {
             opacity: 1;
+            visibility: visible;
             transform: translateX(0);
-            z-index: 2;
+            z-index: 10;
         }
 
-        .slide.prev {
+        .slide.slide-out-left {
+            opacity: 0;
+            visibility: hidden;
             transform: translateX(-100%);
             z-index: 1;
         }
 
-        .slide.next {
+        .slide.slide-out-right {
+            opacity: 0;
+            visibility: hidden;
             transform: translateX(100%);
             z-index: 1;
         }
@@ -306,7 +314,7 @@
             .slide {
                 padding: 20px;
                 overflow-y: auto;
-                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: all 0.3s ease-in-out;
             }
 
             .header {
@@ -773,29 +781,35 @@
             
             isTransitioning = true;
             
+            // Remove todas as classes de transição
+            slides.forEach((slide) => {
+                slide.classList.remove('active', 'slide-out-left', 'slide-out-right');
+            });
+
+            // Aplica as classes corretas
             slides.forEach((slide, index) => {
-                slide.classList.remove('active', 'prev', 'next');
-                
                 if (index === currentSlide) {
                     slide.classList.add('active');
                 } else if (index < currentSlide) {
-                    slide.classList.add('prev');
+                    slide.classList.add('slide-out-left');
                 } else {
-                    slide.classList.add('next');
+                    slide.classList.add('slide-out-right');
                 }
             });
 
+            // Atualiza indicadores
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentSlide);
             });
 
+            // Atualiza botões
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
             
-            // Reset transition lock after animation completes
+            // Reset transition lock
             setTimeout(() => {
                 isTransitioning = false;
-            }, 600);
+            }, 400);
         }
 
         function changeSlide(direction) {
@@ -844,23 +858,20 @@
         }, { passive: true });
 
         function handleSwipe() {
-            const threshold = 50; // Mínimo de pixels para considerar um swipe
+            const threshold = 50;
             const diffX = startX - endX;
             const diffY = Math.abs(startY - endY);
 
-            // Só processa swipe horizontal se o movimento vertical for menor
             if (Math.abs(diffX) > threshold && diffY < Math.abs(diffX)) {
                 if (diffX > 0) {
-                    // Swipe para a esquerda - próximo slide
                     changeSlide(1);
                 } else {
-                    // Swipe para a direita - slide anterior
                     changeSlide(-1);
                 }
             }
         }
 
-        // Previne zoom em double tap nos botões
+        // Previne zoom em double tap
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function(event) {
             const now = (new Date()).getTime();
@@ -875,3 +886,4 @@
     </script>
 </body>
 </html>
+
