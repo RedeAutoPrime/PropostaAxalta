@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposta Comercial - Academia AutoPrime</title>
+    <title>Proposta Comercial - Rede AutoPrime</title>
     <style>
         * {
             margin: 0;
@@ -35,6 +35,7 @@
             transition: all 0.5s ease-in-out;
             padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow-y: auto;
         }
 
         .slide.active {
@@ -53,6 +54,7 @@
             margin-bottom: 30px;
             border-bottom: 3px solid #ff6b35;
             padding-bottom: 20px;
+            flex-shrink: 0;
         }
 
         .logo {
@@ -77,13 +79,15 @@
             padding: 10px 20px;
             border-radius: 25px;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .slide-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
+            min-height: 0;
         }
 
         h1 {
@@ -138,7 +142,7 @@
 
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -169,7 +173,7 @@
 
         .navigation {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -178,7 +182,7 @@
         }
 
         .nav-btn {
-            padding: 15px 25px;
+            padding: 12px 20px;
             background: #ff6b35;
             color: white;
             border: none;
@@ -187,6 +191,7 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 14px;
         }
 
         .nav-btn:hover {
@@ -203,17 +208,17 @@
 
         .slide-indicators {
             position: fixed;
-            bottom: 100px;
+            bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 8px;
             z-index: 1000;
         }
 
         .indicator {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(255,255,255,0.5);
             cursor: pointer;
@@ -282,6 +287,238 @@
         .slide.active .slide-content > *:nth-child(2) { animation-delay: 0.1s; }
         .slide.active .slide-content > *:nth-child(3) { animation-delay: 0.2s; }
         .slide.active .slide-content > *:nth-child(4) { animation-delay: 0.3s; }
+
+        /* RESPONSIVIDADE PARA MOBILE */
+        @media screen and (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                overflow-y: auto;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+
+            .logo {
+                width: 200px;
+                height: 60px;
+            }
+
+            .slide-number {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+                padding-left: 15px;
+            }
+
+            h3 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            li {
+                padding: 12px;
+                margin-bottom: 12px;
+                font-size: 14px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .pricing-card {
+                padding: 20px;
+            }
+
+            .price {
+                font-size: 1.5em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .feature-item {
+                padding: 15px;
+            }
+
+            .highlight-box {
+                padding: 20px;
+                margin: 15px 0;
+            }
+
+            .navigation {
+                bottom: 15px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            .slide-indicators {
+                bottom: 65px;
+                gap: 6px;
+            }
+
+            .indicator {
+                width: 8px;
+                height: 8px;
+            }
+
+            /* Ajustes para telas muito pequenas */
+            @media screen and (max-width: 480px) {
+                .slide {
+                    padding: 15px;
+                }
+
+                .header {
+                    margin-bottom: 15px;
+                }
+
+                .logo {
+                    width: 150px;
+                    height: 50px;
+                }
+
+                h1 {
+                    font-size: 1.5em;
+                    margin-bottom: 15px;
+                }
+
+                h2 {
+                    font-size: 1.3em;
+                    margin-bottom: 15px;
+                    padding-left: 10px;
+                }
+
+                h3 {
+                    font-size: 1.1em;
+                    margin-bottom: 10px;
+                }
+
+                li {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    font-size: 13px;
+                }
+
+                .pricing-card {
+                    padding: 15px;
+                }
+
+                .price {
+                    font-size: 1.3em;
+                }
+
+                .feature-item {
+                    padding: 12px;
+                }
+
+                .highlight-box {
+                    padding: 15px;
+                    margin: 10px 0;
+                }
+
+                .nav-btn {
+                    padding: 8px 12px;
+                    font-size: 11px;
+                }
+            }
+        }
+
+        /* Ajustes para orientação landscape em mobile */
+        @media screen and (max-width: 768px) and (orientation: landscape) {
+            .slide {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: row;
+                margin-bottom: 15px;
+            }
+
+            .logo {
+                width: 150px;
+                height: 40px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+                margin-bottom: 15px;
+            }
+
+            h2 {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Touch-friendly adjustments */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .indicator {
+                min-width: 44px;
+                min-height: 44px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .indicator::after {
+                content: '';
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.5);
+            }
+
+            .indicator.active::after {
+                background: #ff6b35;
+            }
+
+            li:hover {
+                transform: none;
+            }
+
+            .feature-item:hover {
+                transform: none;
+            }
+
+            .pricing-card:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -522,6 +759,34 @@
                 changeSlide(1);
             }
         });
+
+        // Navegação por swipe em dispositivos touch
+        let startX = 0;
+        let endX = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const threshold = 50; // Mínimo de pixels para considerar um swipe
+            const diff = startX - endX;
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // Swipe para a esquerda - próximo slide
+                    changeSlide(1);
+                } else {
+                    // Swipe para a direita - slide anterior
+                    changeSlide(-1);
+                }
+            }
+        }
 
         // Inicializar
         updateSlide();
