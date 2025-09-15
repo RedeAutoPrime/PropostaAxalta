@@ -15,12 +15,17 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             overflow: hidden;
+            height: 100vh;
+            height: 100dvh; /* Para suporte a viewport dinâmica */
         }
 
         .presentation-container {
             width: 100vw;
             height: 100vh;
+            height: 100dvh;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .slide {
@@ -36,9 +41,7 @@
             visibility: hidden;
             transform: translateX(100%);
             transition: all 0.4s ease-in-out;
-            padding: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow-y: auto;
             z-index: 1;
         }
 
@@ -61,6 +64,15 @@
             visibility: hidden;
             transform: translateX(100%);
             z-index: 1;
+        }
+
+        .slide-inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 40px;
+            padding-bottom: 120px; /* Espaço para navegação */
+            overflow-y: auto;
         }
 
         .header {
@@ -195,6 +207,10 @@
             display: flex;
             gap: 15px;
             z-index: 1000;
+            background: rgba(0,0,0,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
         }
 
         .nav-btn {
@@ -227,7 +243,7 @@
 
         .slide-indicators {
             position: fixed;
-            bottom: 80px;
+            bottom: 85px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -311,10 +327,21 @@
 
         /* RESPONSIVIDADE PARA MOBILE */
         @media screen and (max-width: 768px) {
-            .slide {
-                padding: 20px;
+            body {
+                height: 100vh;
+                height: 100dvh;
+            }
+
+            .presentation-container {
+                height: 100vh;
+                height: 100dvh;
+            }
+
+            .slide-inner {
+                padding: 15px;
+                padding-bottom: 100px; /* Espaço reduzido para navegação */
+                height: 100%;
                 overflow-y: auto;
-                transition: all 0.3s ease-in-out;
             }
 
             .header {
@@ -325,23 +352,23 @@
             }
 
             .logo {
-                width: 200px;
-                height: 60px;
+                width: 180px;
+                height: 50px;
             }
 
             .slide-number {
-                padding: 8px 16px;
-                font-size: 12px;
+                padding: 6px 12px;
+                font-size: 11px;
             }
 
             h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
                 margin-bottom: 20px;
             }
 
             h2 {
-                font-size: 1.5em;
-                margin-bottom: 20px;
+                font-size: 1.4em;
+                margin-bottom: 15px;
                 padding-left: 15px;
             }
 
@@ -352,8 +379,8 @@
 
             li {
                 padding: 12px;
-                margin-bottom: 12px;
-                font-size: 14px;
+                margin-bottom: 10px;
+                font-size: 13px;
             }
 
             .pricing-grid {
@@ -363,11 +390,11 @@
             }
 
             .pricing-card {
-                padding: 20px;
+                padding: 18px;
             }
 
             .price {
-                font-size: 1.5em;
+                font-size: 1.4em;
             }
 
             .features-grid {
@@ -381,36 +408,39 @@
             }
 
             .highlight-box {
-                padding: 20px;
+                padding: 18px;
                 margin: 15px 0;
             }
 
             .navigation {
                 bottom: 15px;
-                gap: 10px;
-                padding: 0 10px;
-                width: calc(100% - 20px);
-                max-width: 400px;
+                gap: 8px;
+                padding: 8px 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                max-width: calc(100vw - 30px);
             }
 
             .nav-btn {
-                padding: 12px 16px;
-                font-size: 13px;
+                padding: 10px 15px;
+                font-size: 12px;
                 flex: 1;
-                min-height: 48px;
+                min-height: 44px;
                 border-radius: 25px;
+                min-width: 80px;
             }
 
             .slide-indicators {
-                bottom: 75px;
-                gap: 10px;
+                bottom: 70px;
+                gap: 8px;
             }
 
             .indicator {
-                width: 14px;
-                height: 14px;
-                min-width: 44px;
-                min-height: 44px;
+                width: 10px;
+                height: 10px;
+                min-width: 40px;
+                min-height: 40px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -420,8 +450,8 @@
 
             .indicator::after {
                 content: '';
-                width: 14px;
-                height: 14px;
+                width: 10px;
+                height: 10px;
                 border-radius: 50%;
                 background: rgba(255,255,255,0.5);
                 transition: all 0.3s ease;
@@ -431,108 +461,117 @@
                 background: #ff6b35;
                 transform: scale(1.2);
             }
-
-            /* Ajustes para telas muito pequenas */
-            @media screen and (max-width: 480px) {
-                .slide {
-                    padding: 15px;
-                }
-
-                .header {
-                    margin-bottom: 15px;
-                }
-
-                .logo {
-                    width: 150px;
-                    height: 50px;
-                }
-
-                h1 {
-                    font-size: 1.5em;
-                    margin-bottom: 15px;
-                }
-
-                h2 {
-                    font-size: 1.3em;
-                    margin-bottom: 15px;
-                    padding-left: 10px;
-                }
-
-                h3 {
-                    font-size: 1.1em;
-                    margin-bottom: 10px;
-                }
-
-                li {
-                    padding: 10px;
-                    margin-bottom: 10px;
-                    font-size: 13px;
-                }
-
-                .pricing-card {
-                    padding: 15px;
-                }
-
-                .price {
-                    font-size: 1.3em;
-                }
-
-                .feature-item {
-                    padding: 12px;
-                }
-
-                .highlight-box {
-                    padding: 15px;
-                    margin: 10px 0;
-                }
-
-                .nav-btn {
-                    padding: 10px 12px;
-                    font-size: 12px;
-                    min-height: 44px;
-                }
-
-                .slide-indicators {
-                    bottom: 70px;
-                    gap: 8px;
-                }
-
-                .indicator {
-                    min-width: 40px;
-                    min-height: 40px;
-                }
-
-                .indicator::after {
-                    width: 12px;
-                    height: 12px;
-                }
-            }
         }
 
-        /* Ajustes para orientação landscape em mobile */
-        @media screen and (max-width: 768px) and (orientation: landscape) {
-            .slide {
-                padding: 15px;
+        /* Ajustes para telas muito pequenas */
+        @media screen and (max-width: 480px) {
+            .slide-inner {
+                padding: 12px;
+                padding-bottom: 90px;
             }
 
             .header {
-                flex-direction: row;
                 margin-bottom: 15px;
             }
 
             .logo {
                 width: 150px;
-                height: 40px;
+                height: 45px;
             }
 
             h1 {
-                font-size: 1.6em;
+                font-size: 1.4em;
                 margin-bottom: 15px;
             }
 
             h2 {
+                font-size: 1.2em;
+                margin-bottom: 12px;
+                padding-left: 10px;
+            }
+
+            h3 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            li {
+                padding: 10px;
+                margin-bottom: 8px;
+                font-size: 12px;
+            }
+
+            .pricing-card {
+                padding: 15px;
+            }
+
+            .price {
+                font-size: 1.2em;
+            }
+
+            .feature-item {
+                padding: 12px;
+            }
+
+            .highlight-box {
+                padding: 15px;
+                margin: 12px 0;
+            }
+
+            .navigation {
+                bottom: 10px;
+                padding: 6px 12px;
+                gap: 6px;
+            }
+
+            .nav-btn {
+                padding: 8px 12px;
+                font-size: 11px;
+                min-height: 40px;
+                min-width: 70px;
+            }
+
+            .slide-indicators {
+                bottom: 60px;
+                gap: 6px;
+            }
+
+            .indicator {
+                min-width: 36px;
+                min-height: 36px;
+            }
+
+            .indicator::after {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        /* Ajustes para orientação landscape em mobile */
+        @media screen and (max-width: 768px) and (orientation: landscape) {
+            .slide-inner {
+                padding: 10px;
+                padding-bottom: 80px;
+            }
+
+            .header {
+                flex-direction: row;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                width: 120px;
+                height: 35px;
+            }
+
+            h1 {
                 font-size: 1.4em;
-                margin-bottom: 15px;
+                margin-bottom: 10px;
+            }
+
+            h2 {
+                font-size: 1.3em;
+                margin-bottom: 10px;
             }
 
             .pricing-grid {
@@ -544,11 +583,11 @@
             }
 
             .navigation {
-                bottom: 10px;
+                bottom: 8px;
             }
 
             .slide-indicators {
-                bottom: 60px;
+                bottom: 50px;
             }
         }
 
@@ -576,105 +615,126 @@
                 transform: scale(0.95);
             }
         }
+
+        /* Ajuste para evitar scroll horizontal */
+        @media screen and (max-width: 768px) {
+            * {
+                max-width: 100vw;
+            }
+            
+            .pricing-grid,
+            .features-grid {
+                width: 100%;
+                overflow: hidden;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="presentation-container">
         <!-- Slide 1: Capa -->
         <div class="slide active">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">1 / 6</div>
                 </div>
-                <div class="slide-number">1 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h1>Proposta Comercial</h1>
-                <div class="highlight-box">
-                    <h2 style="color: #ff6b35; border: none; padding: 0; margin-bottom: 15px;">Treinamento de Regulação de Sinistros</h2>
-                    <h3 style="color: white; margin: 0;">Módulo Avançado</h3>
+                <div class="slide-content">
+                    <h1>Proposta Comercial</h1>
+                    <div class="highlight-box">
+                        <h2 style="color: #ff6b35; border: none; padding: 0; margin-bottom: 15px;">Treinamento de Regulação de Sinistros</h2>
+                        <h3 style="color: white; margin: 0;">Módulo Avançado</h3>
+                    </div>
+                    <p style="text-align: center; font-size: 1.2em; color: #666; margin-top: 30px;">
+                        Capacitação especializada para profissionais do setor automotivo
+                    </p>
                 </div>
-                <p style="text-align: center; font-size: 1.2em; color: #666; margin-top: 30px;">
-                    Capacitação especializada para profissionais do setor automotivo
-                </p>
             </div>
         </div>
 
         <!-- Slide 2: Conteúdo do Treinamento - Parte 1 -->
         <div class="slide">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">2 / 6</div>
                 </div>
-                <div class="slide-number">2 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h2>Conteúdo do Treinamento - Módulo Avançado</h2>
-                <ul>
-                    <li>Critérios fundamentais para o orçamento inicial</li>
-                    <li>Ressalvas e pareceres no orçamento inicial</li>
-                    <li>POP – Procedimento Operacional Padrão do Orçamentista de Seguros</li>
-                    <li>O que é o processo de Orientação de complementos para a produção</li>
-                    <li>Como implementar a Orientação de complementos na produção</li>
-                    <li>Itens de segurança passiva e ativa</li>
-                </ul>
+                <div class="slide-content">
+                    <h2>Conteúdo do Treinamento - Módulo Avançado</h2>
+                    <ul>
+                        <li>Critérios fundamentais para o orçamento inicial</li>
+                        <li>Ressalvas e pareceres no orçamento inicial</li>
+                        <li>POP – Procedimento Operacional Padrão do Orçamentista de Seguros</li>
+                        <li>O que é o processo de Orientação de complementos para a produção</li>
+                        <li>Como implementar a Orientação de complementos na produção</li>
+                        <li>Itens de segurança passiva e ativa</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <!-- Slide 3: Conteúdo do Treinamento - Parte 2 -->
         <div class="slide">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">3 / 6</div>
                 </div>
-                <div class="slide-number">3 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h2>Conteúdo do Treinamento - Continuação</h2>
-                <ul>
-                    <li>Alinhamento do fluxo de complementos com a produção</li>
-                    <li>Ressalvas e pareceres no orçamento complementar</li>
-                    <li>Procedimento de conferência e realização de tréplica nas aprovações da seguradora</li>
-                    <li>Como cobrar Difuminado, Estiramento, Diagnóstico eletrônico</li>
-                    <li>Dicas e melhores práticas de utilização do Sistema de Orçamentação Cília</li>
-                </ul>
+                <div class="slide-content">
+                    <h2>Conteúdo do Treinamento - Continuação</h2>
+                    <ul>
+                        <li>Alinhamento do fluxo de complementos com a produção</li>
+                        <li>Ressalvas e pareceres no orçamento complementar</li>
+                        <li>Procedimento de conferência e realização de tréplica nas aprovações da seguradora</li>
+                        <li>Como cobrar Difuminado, Estiramento, Diagnóstico eletrônico</li>
+                        <li>Dicas e melhores práticas de utilização do Sistema de Orçamentação Cília</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
         <!-- Slide 4: Materiais e Recursos Inclusos -->
         <div class="slide">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">4 / 6</div>
                 </div>
-                <div class="slide-number">4 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h2>Materiais e Recursos Inclusos</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <h3>📊 Dashboard Exclusivo</h3>
-                        <p>Ranking de Tíquete médio de M.O. por carro disponível por 12 meses</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>📋 Modelos Prontos</h3>
-                        <p>10 Modelos prontos de pareceres técnicos</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>📚 Material Digital</h3>
-                        <p>Apostila digital completa</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>📄 POP Digital</h3>
-                        <p>PDF do POP do Orçamentista</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>💼 Casos Práticos</h3>
-                        <p>Exercícios em casos reais</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>🏆 Certificação</h3>
-                        <p>Teste on-line com certificação individual</p>
+                <div class="slide-content">
+                    <h2>Materiais e Recursos Inclusos</h2>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <h3>📊 Dashboard Exclusivo</h3>
+                            <p>Ranking de Tíquete médio de M.O. por carro disponível por 12 meses</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>📋 Modelos Prontos</h3>
+                            <p>10 Modelos prontos de pareceres técnicos</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>📚 Material Digital</h3>
+                            <p>Apostila digital completa</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>📄 POP Digital</h3>
+                            <p>PDF do POP do Orçamentista</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>💼 Casos Práticos</h3>
+                            <p>Exercícios em casos reais</p>
+                        </div>
+                        <div class="feature-item">
+                            <h3>🏆 Certificação</h3>
+                            <p>Teste on-line com certificação individual</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -682,72 +742,76 @@
 
         <!-- Slide 5: Formato e Duração -->
         <div class="slide">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">5 / 6</div>
                 </div>
-                <div class="slide-number">5 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h2>Formato e Duração</h2>
-                <div class="highlight-box">
-                    <h3 style="color: #ff6b35; margin-bottom: 20px;">⏰ Duração Total: 16 horas</h3>
-                    <p style="font-size: 1.2em; margin-bottom: 15px;">Dividido em 5 encontros</p>
-                    <p style="font-size: 1.1em;">📹 Formato: On-line ao vivo sem gravação do conteúdo</p>
-                </div>
-                <div style="background: #f8f8f8; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center; border: 1px solid #e8e8e8;">
-                    <h3 style="color: #ff6b35; margin-bottom: 15px;">Vantagens do Formato Ao Vivo</h3>
-                    <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                        <li>Interação direta com o instrutor</li>
-                        <li>Esclarecimento de dúvidas em tempo real</li>
-                        <li>Networking com outros profissionais</li>
-                        <li>Conteúdo sempre atualizado</li>
-                    </ul>
+                <div class="slide-content">
+                    <h2>Formato e Duração</h2>
+                    <div class="highlight-box">
+                        <h3 style="color: #ff6b35; margin-bottom: 20px;">⏰ Duração Total: 16 horas</h3>
+                        <p style="font-size: 1.2em; margin-bottom: 15px;">Dividido em 5 encontros</p>
+                        <p style="font-size: 1.1em;">📹 Formato: On-line ao vivo sem gravação do conteúdo</p>
+                    </div>
+                    <div style="background: #f8f8f8; padding: 25px; border-radius: 15px; margin-top: 30px; text-align: center; border: 1px solid #e8e8e8;">
+                        <h3 style="color: #ff6b35; margin-bottom: 15px;">Vantagens do Formato Ao Vivo</h3>
+                        <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                            <li>Interação direta com o instrutor</li>
+                            <li>Esclarecimento de dúvidas em tempo real</li>
+                            <li>Networking com outros profissionais</li>
+                            <li>Conteúdo sempre atualizado</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Slide 6: Investimento -->
         <div class="slide">
-            <div class="header">
-                <div class="logo">
-                    <img src="logo auto prime.png" alt="AutoPrime Logo">
+            <div class="slide-inner">
+                <div class="header">
+                    <div class="logo">
+                        <img src="logo auto prime.png" alt="AutoPrime Logo">
+                    </div>
+                    <div class="slide-number">6 / 6</div>
                 </div>
-                <div class="slide-number">6 / 6</div>
-            </div>
-            <div class="slide-content">
-                <h2>Opções de Investimento</h2>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3>Opção 1</h3>
-                        <div class="price">R\$ 72.000</div>
-                        <p>Somente o treinamento</p>
+                <div class="slide-content">
+                    <h2>Opções de Investimento</h2>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <h3>Opção 1</h3>
+                            <div class="price">R\$ 72.000</div>
+                            <p>Somente o treinamento</p>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>Opção 2</h3>
+                            <div class="price">R\$ 80.000</div>
+                            <p>Treinamento + 40 reuniões individuais</p>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>Opção 3</h3>
+                            <div class="price">R\$ 88.000</div>
+                            <p>Treinamento + 80 reuniões individuais</p>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>Opção 4</h3>
+                            <div class="price">R\$ 96.000</div>
+                            <p>Treinamento + 120 reuniões individuais</p>
+                        </div>
+                        <div class="pricing-card">
+                            <h3>Opção 5</h3>
+                            <div class="price">R\$ 104.000</div>
+                            <p>Treinamento + 160 reuniões individuais</p>
+                        </div>
                     </div>
-                    <div class="pricing-card">
-                        <h3>Opção 2</h3>
-                        <div class="price">R\$ 80.000</div>
-                        <p>Treinamento + 40 reuniões individuais</p>
+                    <div class="highlight-box" style="margin-top: 30px;">
+                        <h3 style="color: #ff6b35; margin-bottom: 10px;">💳 Forma de Pagamento</h3>
+                        <p style="font-size: 1.2em;">Faturado em 1+1 (30 dias)</p>
+                        <p style="font-size: 0.9em; margin-top: 10px;">*Reuniões individuais de até 1h para avaliação de orçamento e diagnóstico</p>
                     </div>
-                    <div class="pricing-card">
-                        <h3>Opção 3</h3>
-                        <div class="price">R\$ 88.000</div>
-                        <p>Treinamento + 80 reuniões individuais</p>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Opção 4</h3>
-                        <div class="price">R\$ 96.000</div>
-                        <p>Treinamento + 120 reuniões individuais</p>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Opção 5</h3>
-                        <div class="price">R\$ 104.000</div>
-                        <p>Treinamento + 160 reuniões individuais</p>
-                    </div>
-                </div>
-                <div class="highlight-box" style="margin-top: 30px;">
-                    <h3 style="color: #ff6b35; margin-bottom: 10px;">💳 Forma de Pagamento</h3>
-                    <p style="font-size: 1.2em;">Faturado em 1+1 (30 dias)</p>
-                    <p style="font-size: 0.9em; margin-top: 10px;">*Reuniões individuais de até 1h para avaliação de orçamento e diagnóstico</p>
                 </div>
             </div>
         </div>
@@ -781,12 +845,10 @@
             
             isTransitioning = true;
             
-            // Remove todas as classes de transição
             slides.forEach((slide) => {
                 slide.classList.remove('active', 'slide-out-left', 'slide-out-right');
             });
 
-            // Aplica as classes corretas
             slides.forEach((slide, index) => {
                 if (index === currentSlide) {
                     slide.classList.add('active');
@@ -797,16 +859,13 @@
                 }
             });
 
-            // Atualiza indicadores
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentSlide);
             });
 
-            // Atualiza botões
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
             
-            // Reset transition lock
             setTimeout(() => {
                 isTransitioning = false;
             }, 400);
@@ -831,7 +890,6 @@
             }
         }
 
-        // Navegação por teclado
         document.addEventListener('keydown', function(e) {
             if (e.key === 'ArrowLeft') {
                 changeSlide(-1);
@@ -840,7 +898,6 @@
             }
         });
 
-        // Navegação por swipe em dispositivos touch
         let startX = 0;
         let endX = 0;
         let startY = 0;
@@ -871,7 +928,6 @@
             }
         }
 
-        // Previne zoom em double tap
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function(event) {
             const now = (new Date()).getTime();
@@ -881,7 +937,6 @@
             lastTouchEnd = now;
         }, false);
 
-        // Inicializar
         updateSlide();
     </script>
 </body>
